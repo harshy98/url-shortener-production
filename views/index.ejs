@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>URL Shortener</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Baloo+2|Manrope|Roboto+Mono&display=swap" rel="stylesheet">
+</head>
+<body style="background: #282828">
+	<div class="container">
+		<div class="jumbotron" style="line-height: 80%">
+		<h1 style="text-align: center;font-family: 'Roboto Mono', monospace;">URL Shortener</h1>
+		<p style="text-align: center;font-family: 'Roboto Mono', monospace;">Made with love by Harsh(github/xcodex123)</p>
+		<p style="text-align: center;font-family: 'Roboto Mono', monospace;" class="small">Credits: youtube/Web Dev Simplified</p>
+		<p style="text-align: center;font-family: 'Roboto Mono', monospace;" class="small">Please enter Full URL (with https://) for accurate results.</p>
+		<p style="text-align: center;font-family: 'Roboto Mono', monospace;">UPDATEv2: newer links now pop up at top, making it easier for you to find them.</p>
+		<p style="text-align: center;font-family: 'Roboto Mono', monospace;">UPDATEv3: now search URLs based on keywords</p>
+		</div>
+		<form action='/posturl' method='POST' class="my-4 form-inline">
+			<label for='fullUrl' class="sr-only"></label>
+			<input name='fullUrl' id='fullUrl' placeholder="URL" required class="form-control col mr-2 input-group" style="font-family: 'Manrope', sans-serif;"></input>
+			<button type="submit" class="btn btn-success" style="font-family: 'Manrope', sans-serif;">SUBMIT</button>
+		</form>
+		<form action='/searchurl' method='POST' class="my-4 form-inline">
+			<label for='searchtext' class="sr-only"></label>
+			<input name='searchtext' id='searchtext' placeholder="Search Keyword" required class="form-control col mr-2 input-group" style="font-family: 'Manrope', sans-serif;"></input>
+			<button type="submit" class="btn btn-success" style="font-family: 'Manrope', sans-serif;">SEARCH</button>
+		</form>
+		<table class="table table-striped table-responsive">
+			<thead>
+				<tr class="active">
+					<td style="font-family: 'Manrope', sans-serif;color: #fff"><strong>Full URL</strong></td>
+					<td style="font-family: 'Manrope', sans-serif;color: #fff"><strong>Short URL</strong></td>
+					<td style="font-family: 'Manrope', sans-serif;color: #fff"><strong># of clicks</strong></td>
+				</tr>
+			</thead>
+			<tbody>
+				<% shortUrls.forEach(shortUrl => { %>
+					<tr>
+						<td><a href="<%= shortUrl.full %>" target="_blank" id="fullurl" style="font-family: 'Baloo 2', cursive;color: #0074D9"><%= shortUrl.full %></a></td>
+						<td><a href="<%= shortUrl.short %>" target="_blank" id="shorturl" style="font-family: 'Baloo 2', cursive;color: #FF4136"><%= shortUrl.short %></a></td>
+						<td style="font-family: 'Baloo 2', cursive;color: #fff"><%= shortUrl.clicks %></td>
+					</tr>
+				<% }) %>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
